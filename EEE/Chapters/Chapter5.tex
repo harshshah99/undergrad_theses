@@ -1,0 +1,39 @@
+% Chapter Template
+
+\chapter{Result and Discussion} % Main chapter title
+
+\label{Chapter5} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 5. \emph{Result and Discussion}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+
+\section{Results}
+
+The results from all the models that have been introduced previously are discussed in this section.
+
+\subsection{Full Data}
+
+All the baseline models were run on the full dataset (600k rows). They do not use anything other than the mail text as input. 
+\input{tables/full_data_baseline_models}
+
+RoBERTa outperforms all the other baseline models on all metrics except Majority F1. Since the other features are not available for the full data, the MultiModal models have not been included in Table~\ref{tab:baseline_full_results}.
+
+\subsection{MultiModal Data}
+
+Using 18K rows from the full data, this subset is created which contains 135 other non-text features apart from the email body. Results from the models that were run on this data are presented in Table~\ref{tab:18k_data_results}
+
+\input{tables/18k_data_results}
+
+It is evident from the results that these non-text features do have the power to improve the model by providing more context about the mail, the sender and the receiver. While the model with LIWC, Politeness and Topic features are only $\sim$1\% more accurate than RoBERTa, the other MultiModal models are upto $\sim$4\% more accurate.
+
+
+\section{Discussion}
+
+As seen in Table~\ref{tab:baseline_full_results} and \ref{tab:18k_data_results}, the MultiModal models perform better than all the baseline models, beating the most capable model (RoBERTa) by more than $\sim$4\% in terms of accuracy. Comparing the different MultiModal models, we see that adding Influence features to BERT with Interpersonal Context features results in a small improvement. 
+
+Another observation from the above results is that while features like LIWC and Politeness, which capture different stylistic properties about the text, do increase the accuracy of the model but not nearly as much as features like Interpersonal Context, which provide information about the linguistic style of the sender and receiver.  
+
+Further work needs to be done to figure out the kind of features which lead to this increase in the model performance.

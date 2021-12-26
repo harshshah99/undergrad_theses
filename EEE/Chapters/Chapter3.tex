@@ -1,0 +1,108 @@
+% Chapter 3
+
+\chapter{Dataset Description} % Main chapter title
+
+\label{Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter3} 
+
+\lhead{Chapter 3. \emph{Dataset Description}} % This is for the header on each page - perhaps a shortened title
+
+%----------------------------------------------------------------------------------------
+
+\section{Luxury-Standard Dataset}
+
+The data used in this work is the Luxury-Standard Dataset\cite{Sung2017EmployeesRT}. Luxury Inc. and Standard Inc. were two rival good manufacturing firms in the U.S. that merged to form the new Luxury-Standard Inc. The original data was collected post-merger to understand how the behavioral changes in the employees could influence the chances of success of the newly formed Luxury-Standard.
+
+The data was collected between 2012 and 2015 by surveying the employees on various aspects like job security, organizational attachment, relation with other employees, and so on. Apart from this, the dataset also contains information on emails exchanged by the employees in this period. All the data which can be used to identify an employee or has sensitive information has been de-identified. \\
+
+\input{tables/dataset_stats}
+
+\section{Email Data}
+
+The dataset contains around 0.6 million emails exchanged by the employees. This information is present as a CSV with each row corresponding to an email exchanged. Each row also contains metadata related to that email, including but not limited to the email body, timestamp, sender, receiver, thread\_id and reply. Table~\ref{tab:csv_structure} contains the details of columns present in the CSV. \\
+
+\input{tables/csv_structure}
+
+A small subset of the employees was surveyed about their relations with other colleagues. Employees rated their coworkers on traits like friendliness, communication frequency, and whether they would avoid a particular coworker or not. Merging this data with the original data results in a CSV with approximately 18,000 emails where apart from the columns mentioned above, details regarding the interpersonal relations of the sender and the receiver are also present. 
+
+\section{Extracted Features}
+
+Apart from the information present already in the dataset, the message column containing the email body can be used to derive many more features. The content of the message contains many psycho-linguistic and politeness-related markers which can help improve the accuracy of the models.
+
+\subsection{LIWC}
+
+Linguistic Inquiry and Word Count (LIWC)\cite{pennebaker2007linguistic} is a dictionary containing words and word stems. Each word/word stem is associated with a number of psychological, emotional and linguistic categories. This helps to break down a block of text into its semantic components, which can be used to analyze psycho-linguistic markers present in it.
+\input{tables/liwc_example}
+
+The updated 2015 version of the LIWC dictionary has been used to generate 93 features for experiments carried out in this work. Table~\ref{tab:liwc2015_example} shows some of the features generated using LIWC. Each row in the table corresponds to an email in the dataset. 
+
+
+\subsection{Politeness}
+
+Similar to LIWC, Convokit\cite{chang-etal-2020-convokit} helps to extract conversational linguistic features from text. For this work in particular, politeness features\cite{DanescuNiculescuMizil2013ACA} are extracted using Convokit. This helps generate 21 categorical features like Gratitude, Sentiment and Please which capture the politeness quotient in the mail.
+
+
+\subsection{SNA}
+
+Social Network Analysis (SNA) is used to study agents and ties in a social network. Since this dataset is not in a graph format, it needs to be converted to a compatible format before SNA can be applied to it. To achieve this, a social graph is constructed using employees as the nodes. From this graph, various features related to the node's degree and connections are extracted. 
+
+\input{tables/sna_example}
+
+\subsection{Interpersonal Context}
+
+While the previous features help to capture information from the mail content or a social graph, in interpersonal context, the primary aim is to capture the linguistic style of the sender and receiver. The equations below depict the procedure followed to generate these features.
+
+\begin{equation}
+\begin{aligned}
+\text{For }e_t : s &\rightarrow r \text{, where}\\
+e_t = \text{Email exchanged at time} &= t, s = \text{Sender},  r = \text{Receiver} \\ 
+\end{aligned}
+\end{equation}
+
+To capture the linguistic style of the sender, the recent most 4 emails sent by the sender to anyone else in the organization are concatenated with  a [SEP] token (special token used by BERT tokenizers) in between. The BERT embedding of this concatenated text is used as a representation of the linguistic style of the sender at time = $t$.
+
+\begin{equation}
+\begin{aligned}
+L_{t}^{s} &= \phi_{BERT} \left( \bigl[ e_{t-4}^{s}:[SEP]:e_{t-3}^{s}:[SEP]:...:e_{t-1}^{s} \bigr]\right) \\
+&= \text{Linguistic Style of $s$ at time} = t \\
+\text{where } &\phi_{BERT} \left( x \right) \text{returns a 768 dimension BERT embedding of $x$} 
+\end{aligned}
+\end{equation}
+
+Similarly we can capture the receiver's style by concatenating the recent most 4 mails sent by the receiver $r$ to anyone else in the organisation.
+
+\begin{equation}
+\begin{aligned}
+L_{t}^{r} &= \phi_{BERT} \left( \bigl[ e_{t-4}^{r}:[SEP]:e_{t-3}^{r}:[SEP]:...:e_{t-1}^{r} \bigr]\right) \\
+&= \text{Linguistic Style of $r$ at time} = t 
+\end{aligned}
+\end{equation}
+
+Now, to see how much similar the content of current email $e_t$ is to the writing style of sender $s$ and receiver $r$, we compute the cosine similarity between the BERT embedding of $e_t$ with $L_{t}^{s}$ and $L_{t}^{r}$.
+
+\begin{equation}
+\begin{aligned}
+S_{es} &= CosSim \left( \phi_{BERT} \left(e_t \right) ,L_{t}^{s} \right) \\
+S_{er} &= CosSim \left( \phi_{BERT} \left(e_t \right) ,L_{t}^{r} \right) \\
+&\hspace{0.7cm}\text{where} \\ 
+CosSim(a,b) &= \text{Cosine Similarity between vectors $a$ and $b$}
+\end{aligned}
+\end{equation}
+
+$S_{es}$ and $S_{er}$ obtained above are the interpersonal context features we use in the proposed model.
+
+\subsection{Influence Features}
+In addition to SNA features which are being used to implicitly capture the workplace relations between employees by modelling the data into a social graph, the surveys conducted on employees where they were asked to rate their fellow coworkers on aspects like Friendship, Avoid, Communication Frequency and others are also present. These features are referred to as Influence features.
+
+\subsection{Topic}
+
+Topic is a categorical feature which indicates whether the email $e_t$ is a Business related email or a Personal one. The classifier used to extract this feature has been released in the paper titled "Work Hard, Play Hard"\cite{alkhereyf-rambow-2017-work}.
+
+\subsection{Number of Features}
+
+Table~\ref{tab:feature_count} summarizes the dimension and data type of each of the features discussed in the last few sections. 
+
+\input{tables/feature_count}
+
+
+
+

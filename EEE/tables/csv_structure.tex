@@ -1,0 +1,42 @@
+\begin{table}[!h]
+\captionsetup{textfont = large}
+\caption{Table Structure}
+\label{tab:csv_structure}
+\begin{center}
+\resizebox{0.7\textwidth}{!}{
+\begin{tabular}{|l|l|r|}
+\hline
+\textbf{Column Name} & \textbf{Data Type} & \textbf{Description}                     \\ \hline
+pstid                & String             & Unique Identifier for each mail          \\ \hline
+date\_               & DateTime           & Timestamp                                \\ \hline
+thread\_id           & Integer            & Thread Id to which the mail belongs to   \\ \hline
+id                   & Integer            & ID of an email within a specific thread  \\ \hline
+message              & String             & Text in the mail body                    \\ \hline
+sender               & String             & Unique identifier for the sender         \\ \hline
+receiver             & String             & Unique identifier for the receiver       \\ \hline
+reply                & Bool               & 0 if the mail has no reply, otherwise 1 \\ \hline
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+% \begin{table}[!h]
+% \captionsetup{textfont = large}
+% \caption{Dataset Description}
+% \label{tab:datasetstats}
+% \begin{center}
+% \resizebox{0.35\textwidth}{!}{
+% \begin{tabular}{lr}
+% \hline
+% \multirow{1}{*}{\textbf{Aspect}} & \multicolumn{1}{c}{\textbf{Value}}  \\ \hline
+% Emails exchanged & 665120\\ \hline
+% Employees & 4502 \\ \hline
+% Time period in days & 252 \\ \hline  
+% Mails per Employee & 159 \\ \hline
+% Mails per day & 3256 \\ \hline
+% %Diplomacy - Rapport & 7823& 1269 & 1981& 293\\ \hline
+% % CLAff-OffMyChest - Popularity & 11403& 2575& 2851& 644\\ \hline
+% \end{tabular}
+% }
+% \end{center}
+% \end{table}

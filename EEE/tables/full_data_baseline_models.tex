@@ -1,0 +1,24 @@
+\begin{table}[!h]
+\captionsetup{textfont = large}
+\caption{Baseline Results - Full Data}
+\label{tab:baseline_full_results}
+\begin{center}
+\resizebox{0.75\textwidth}{!}{
+\begin{tabular}{|l|r|r|r|r|}
+\hline
+\textbf{Model}   & \multicolumn{1}{l|}{\textbf{Majority F1}} & \multicolumn{1}{l|}{\textbf{Minority F1}} & \multicolumn{1}{l|}{\textbf{Macro F1}} & \multicolumn{1}{l|}{\textbf{Accuracy}} \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+SVM + tfidf      & 0.819                                     & 0.19                                      & 0.505                                  & 0.705                                  \\ \hline
+CNN              & 0.827                                     & 0.163                                     & 0.495                                  & 0.713                                  \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+LSTM             & 0.827                                     & 0.178                                     & 0.503                                  & 0.714                                  \\ \hline
+BiLSTM           & 0.827                                     & 0.183                                     & 0.505                                  & 0.715                                  \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+LSTM + Attention & 0.828                                     & 0.179                                     & 0.503                                  & 0.715                                  \\ \hline
+BERT             & 0.827                                     & 0.215                                     & 0.521                                  & 0.716                                  \\ \hline
+\rowcolor[HTML]{C0C0C0} 
+RoBERTa          & 0.826                                     & \textbf{0.232}                            & \textbf{0.529}                         & \textbf{0.717}                         \\ \hline
+\end{tabular}
+}
+\end{center}
+\end{table}

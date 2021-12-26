@@ -1,0 +1,23 @@
+
+\begin{table}[!h]
+\captionsetup{textfont = large}
+\caption{List of baseline models}
+\label{tab:baseline_list}
+\begin{center}
+\resizebox{0.4\textwidth}{!}{
+
+\begin{tabular}{|c|r|}
+\hline
+\textbf{Category}                                   & \textbf{Model}   \\ \hline \hline
+Basic                                               & SVM + TF-IDF     \\ \hline \hline
+\multirow{4}{*}{DL Based}                           & CNN              \\ \cline{2-2} 
+                                                    & LSTM             \\ \cline{2-2} 
+                                                    & BiLSTM           \\ \cline{2-2} 
+                                                    & LSTM + Attention \\ \hline \hline
+\multicolumn{1}{|l|}{\multirow{2}{*}{Transformers}} & BERT             \\ \cline{2-2} 
+\multicolumn{1}{|l|}{}                              & RoBERTa          \\ \hline
+\end{tabular}
+}
+\end{center}
+\end{table}
+

@@ -1,0 +1,23 @@
+\begin{table}[!h]
+\captionsetup{textfont = large}
+\caption{Model Results - 18K Data}
+\label{tab:18k_data_results}
+\begin{center}
+\resizebox{0.85\textwidth}{!}{
+\begin{tabular}{|l|r|r|r|}
+\hline
+\textbf{Model}                           & \multicolumn{1}{l|}{\textbf{Minority F1}} & \multicolumn{1}{l|}{\textbf{Macro F1}} & \multicolumn{1}{l|}{\textbf{Accuracy}} \\ \hline
+SVM + tfidf                              & 0.263                                     & 0.528                                  & 0.677                                  \\ \hline
+CNN                                      & 0.240                                     & 0.524                                  & 0.693                                  \\ \hline
+LSTM                                     & 0.133                                     & 0.481                                  & 0.713                                  \\ \hline
+BiLSTM                                   & 0.186                                     & 0.507                                  & 0.716                                  \\ \hline
+LSTM + Attention                         & 0.034                                     & 0.433                                  & 0.713                                  \\ \hline
+BERT                                     & 0.272                                     & 0.546                                  & 0.712                                  \\ \hline
+RoBERTa                                  & 0.272                                     & 0.548                                  & 0.716                                  \\ \hline
+BERT + LIWC + Politeness + Topic         & 0.085                                     & 0.461                                  & 0.724                                  \\ \hline
+BERT + Interpersonal Context             & 0.257                                     & 0.555                                  & 0.754                                  \\ \hline
+BERT + Interpersonal Context + Influence & \textbf{0.264}                            & \textbf{0.559}                         & \textbf{0.757}                         \\ \hline
+\end{tabular}
+}
+\end{center}
+\end{table}
