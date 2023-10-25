@@ -1,3 +1,3 @@
-Latex files for BITS ___ - ECO Undergraduate Thesis   
+Latex files for BITS F422T - ECO Undergraduate Thesis   
 
 Title : Deep Learning for Option Pricing
