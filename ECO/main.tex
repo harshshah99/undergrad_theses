@@ -1,0 +1,236 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Thesis / Project Report
+% LaTeX Template
+% Version 2.0 (08/04/16)
+%
+% Author:
+% Siddhant Shrivastava
+% https://github.com/sidcode/bits-pilani-thesis-template-latex
+%
+% This template is heavily based on the work of Darshit Shah, Steven Gunn and Sunil Patel
+% Darshit Shah
+% https://github.com/darnir/BPHC-LaTeX-Report-Class
+% Steven Gunn
+% http://users.ecs.soton.ac.uk/srg/softwaretools/document/templates/
+% and
+% Sunil Patel
+% http://www.sunilpatel.co.uk/thesis-template/
+%
+% License:
+% CC BY-NC-SA 4.0 (http://creativecommons.org/licenses/by-nc-sa/4.0/)
+%
+% Note:
+% Make sure to edit document variables in the Thesis.cls file
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%-------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%-------------------------------------------------------------------------------
+
+\documentclass[11pt, a4paper, oneside]{Thesis} % Paper size, default font size
+                                               % and one-sided paper
+
+\graphicspath{{Pictures/}} % Specifies the directory where pictures are stored
+
+\usepackage[backend=bibtex]{biblatex}
+\bibliography{Bibliography.bib}
+
+\usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{mathtools}
+\usepackage{etoolbox}% http://ctan.org/pkg/etoolbox
+\usepackage{multido}% http://ctan.org/pkg/multido
+\usepackage{amsmath} 
+\usepackage{graphicx}
+\usepackage{lscape}
+\usepackage{changepage} 
+\usepackage{nccmath} 
+\usepackage[table]{xcolor}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{enumitem}
+\usepackage{courier}
+\usepackage{caption}
+\usepackage{adjustbox}
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{afterpage}
+\usepackage[table,xcdraw]{xcolor}
+\usepackage{float}
+\usepackage[caption = false]{subfig}
+\usepackage{pdfpages}
+\usepackage{svg}
+
+
+\newcommand\Source[1]{\par\scriptsize{\textbf{Source:} \url{#1}\par}}
+\newcommand\source[1]{\par\footnotesize{\textbf{Source:} \text{#1}\par}}
+
+\title{\ttitle} % Defines the thesis title - don't touch this
+
+\begin{document}
+
+\frontmatter % Use roman numbering style (i, ii...) for the pre-content pages
+
+\setstretch{1.3} % Line spacing of 1.3
+
+% Define page headers using FancyHdr package and set up for one-sided printing
+\fancyhead{} % Clears all page headers and footers
+\rhead{\thepage} % Sets the right side header to show the page number
+\lhead{} % Clears the left side page header
+
+\pagestyle{fancy} % Finally, use the "fancy" page style to implement the
+                  %FancyHdr headers
+
+% Input all the variables used in the document. Please fill out the
+% variables.tex file with all your details.
+\input{variables}
+%-------------------------------------------------------------------------------
+%   NON-CONTENT PAGES
+%-------------------------------------------------------------------------------
+\maketitle
+\Declaration
+\Certificate
+\Quotation{Yesterday is history, Tomorrow is a mystery, and today is a gift. That's why they call it Present.}{Master Oogway}
+
+\begin{abstract}
+% The Thesis Abstract is written here (and usually kept to just this page).
+% The page is kept centered vertically so can expand into the blank space above
+% the title too\ldots
+Option pricing a very important problem in the field of mathematical finance. Partial differential equation (PDE) based models like Black-Scholes and Heston which are used to price European styles options have been around for a long time. These models provide a satisfactory method to calculate the theoretical value of the premium. With the advent of Deep Learning, models which can learn patterns from data rather than relying on assumptions have started to emerge. 
+In this work we explore the effectiveness of neural network based model to price options, specifically the NIFTY 50 Index option between 2017 and 2022.
+\end{abstract}
+
+\begin{acknowledgements}
+
+I want to offer my heartfelt thanks towards Prof. N V M Rao for giving his time to guide us through the intricacies of this project and encouraged me to pursue new ideas and provided valuable feedback. I am obligated to the Department of Economics and Finance at the Birla Institute of Technology and Science, Pilani, Pilani Campus for their direction and resources.
+
+
+% I want to thank Dr. Kokil Jaidka for giving me the opportunity to work under her guidance.
+\end{acknowledgements}
+
+%-------------------------------------------------------------------------------
+%	LIST OF CONTENTS/FIGURES/TABLES PAGES
+%-------------------------------------------------------------------------------
+
+% The page style headers have been "empty" all this time, now use the "fancy"
+% headers as defined before to bring them back
+\pagestyle{fancy}
+
+\lhead{\emph{Contents}} % Set the left side page header to "Contents"
+\tableofcontents % Write out the Table of Contents
+
+% Set the left side page header to "List of Figures"
+\lhead{\emph{List of Figures}}
+\listoffigures % Write out the List of Figures
+
+ % Set the left side page header to "List of Tables"
+% \lhead{\emph{List of Tables}}
+% \listoftables % Write out the List of Tables
+
+%-------------------------------------------------------------------------------
+%	ABBREVIATIONS
+%-------------------------------------------------------------------------------
+
+\clearpage % Start a new page
+
+ % Set the line spacing to 1.5, this makes the following tables easier to read
+\setstretch{1.5}
+
+\lhead{\emph{Abbreviations}} % Set the left side page header to "Abbreviations"
+\listofsymbols{ll} % Include a list of Abbreviations (a table of two columns)
+{
+\textbf{PDE} & \textbf{P}artial \textbf{D}ifferential \textbf{E}quation \\
+\textbf{DNN} & \textbf{D}eep \textbf{N}eural \textbf{N}etwork \\
+\textbf{CSV} & \textbf{C}omma \textbf{S}eperated \textbf{V}alues \\
+
+%\textbf{Acronym} & \textbf{W}hat (it) \textbf{S}tands \textbf{F}or \\
+}
+
+%-------------------------------------------------------------------------------
+%	PHYSICAL CONSTANTS/OTHER DEFINITIONS
+%-------------------------------------------------------------------------------
+
+% \clearpage % Start a new page
+
+% % Set the left side page header to "Physical Constants"
+% \lhead{\emph{Notation}}
+
+%  % Include a list of Physical Constants (a four column table)
+% \listofconstants{lrcl}
+% {
+% Speed of Light & $c$ & $=$ & $2.997\ 924\ 58\times10^{8}\ \mbox{ms}^{-\mbox{s}}$ (exact)\\
+% % Constant Name & Symbol & = & Constant Value (with units) \\
+% }
+
+%-------------------------------------------------------------------------------
+%	SYMBOLS
+%-------------------------------------------------------------------------------
+
+% \clearpage % Start a new page
+
+% \lhead{\emph{Glossary}} % Set the left side page header to "Symbols"
+
+% \listofnomenclature % List the nomenclature. (We use the glossaries package)
+
+%-------------------------------------------------------------------------------
+%	DEDICATION
+%-------------------------------------------------------------------------------
+
+\setstretch{1.5} % Return the line spacing back to 1.3
+
+\pagestyle{empty} % Page style needs to be empty for this page
+
+% Dedication text
+\Dedicatory{Dedicated to my Parents}
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+%-------------------------------------------------------------------------------
+%	THESIS CONTENT - CHAPTERS
+%-------------------------------------------------------------------------------
+
+\mainmatter % Begin numeric (1,2,3...) page numbering
+
+\pagestyle{fancy} % Return the page headers back to the "fancy" style
+
+% Include the chapters of the thesis as separate files from the Chapters folder
+% Uncomment the lines as you write the chapters
+
+\input{Chapters/Chapter1}
+\input{Chapters/Chapter2}
+\input{Chapters/Chapter3}
+\input{Chapters/Chapter4}
+\input{Chapters/Chapter5}
+\input{Chapters/Chapter6}
+%\input{Chapters/Chapter7}
+
+%-------------------------------------------------------------------------------
+%	THESIS CONTENT - APPENDICES
+%-------------------------------------------------------------------------------
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+\appendix % Cue to tell LaTeX that the following 'chapters' are Appendices
+
+% Include the appendices of the thesis as separate files from the Appendices
+% folder
+% Uncomment the lines as you write the Appendices
+
+%\input{Appendices/AppendixC}
+
+\addtocontents{toc}{\vspace{2em}} % Add a gap in the Contents, for aesthetics
+
+\backmatter
+
+%-------------------------------------------------------------------------------
+%	BIBLIOGRAPHY
+%-------------------------------------------------------------------------------
+
+\label{Bibliography}
+
+\lhead{\emph{Bibliography}} % Change the page header to say "Bibliography"
+
+\printbibliography
+
+\end{document}

@@ -1,0 +1,22 @@
+% Chapter 3
+
+\chapter{Literature Review} % Main chapter title
+
+\label{Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter3} 
+
+\lhead{Chapter 3. \emph{Literature Review}} % This is for the header on each page - perhaps a shortened title
+
+%----------------------------------------------------------------------------------------
+In the recent years, research in mathematical finance has started incorporating AI based methods in addition to existing traditional models. This chapter looks at previous work in pricing options using deep learning. 
+
+In a paper titled “Machine Learning in Finance:The Case of Deep Learning for Option Pricing“\cite{Culkin2017MachineLI}, Culkin and Das experimented with a basic Neural Network model consisting of 4 hidden layers containing 100 neurons each. Even with such a basic model, they were able to achieve an RMSE of 0.0112 and a 4\% option pricing error for both In-sample and Out-of-sample options. In addition to the low error, they also reported an R2 value of 0.9982, which is very high. Their study showed promising results for neural networks in option pricing.
+
+Herzog and Osamah's 2019 paper "Reverse Engineering of Option Pricing: An AI Application"\cite{Herzog2019ReverseEO} uses a genetic algorithm approach to model option prices in the German market. Their results show that their RE (Reverse Engineering) model outperformed the Black-Scholes model 2740/2791 times, or more than 98\% of the time. This paper is shows how Fuzzy logic and Artificial Intellignce based approaches are starting to outperform models like Black-Scholes and Heston by leveraging more data and improving software and hardware.
+
+
+In "Pricing options and computing implied volatilities using neural networks"\cite{risks7010016}, the authors try something different by comparing the PDE models to Neural Network models. They use different methods like Black-Scholes model, Heston model and Brent method to generate a large number of option prices and then train Neural networks using different numbers of layers, neurons, etc. to reproduce the results of these methods. This provides a huge advantage in terms of speed and accuracy since Neural Networks are much more parallelizable as compared to PDE based solvers.
+
+Das in his 2016 article\cite{10.1007/s00521-016-2303-y} proposes and investigates a hybrid model that combines parametric option pricing models (such as the Black–Scholes option pricing model) with non-parametric machine learning techniques (such as support vector regression and extreme learning machine-based regression models). The main advantages of this hybrid approach are that it can focus on nonlinear approximation, learn the mechanism of the options market by understanding the key features embedded in the parametric models, and reduce forecasting error by using non-parametric models. Additionally, this approach can reduce the influence of seasonality in data and reduce computational complexity by using a smaller group of data for predictions.
+
+
+Goswami\cite{Goswami2020DatadrivenOP} in his recent work on pricing options of Indian market indices, explores the use of supervised machine-learning algorithms to price European-style call options. Three different approaches are proposed, each of which yields a range of fair prices rather than a single price point. The model performance is tested on two stock market indices: NIFTY50 and BANKNIFTY from the Indian equity market. In total, 17-22 features are generated from the market data, which are then used to train two models - an Artificial Neural Network and the XGBoost algorithm respectively.
